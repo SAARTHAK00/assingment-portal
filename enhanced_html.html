@@ -276,21 +276,30 @@
 
   <!-- Grade Fetch Script -->
   <script>
-    fetch("https://script.google.com/macros/s/AKfycbygySpoqdNcUVNZ8TuFwMKGP6Ofu9axR382C13prSA/dev/ecex")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then(grade => {
-        document.getElementById("grade").innerText = grade;
-      })
-      .catch(error => {
-        console.error("Grade fetch failed:", error);
-        document.getElementById("grade").innerText = "Error";
-      });
-    
+    // Try to fetch grade data
+    try {
+      fetch("https://script.google.com/macros/s/AKfycbygySpoqdNcUVNZ8TuFwMKGP6Ofu9axR382C13prSA/dev/ecex")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then(grade => {
+          document.getElementById("grade").innerText = grade;
+        })
+        .catch(error => {
+          console.error("Grade fetch failed:", error);
+          document.getElementById("grade").innerText = "Error";
+        });
+    } catch (error) {
+      console.error("Grade fetch failed:", error);
+      document.getElementById("grade").innerText = "Error";
+    }
+  </script>
+  
+  <!-- Password Protection Script -->
+  <script>
     // Hif Lumen Password Protection
     document.addEventListener('DOMContentLoaded', function() {
       const modal = document.getElementById('passwordModal');
